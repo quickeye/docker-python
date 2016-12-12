@@ -8,5 +8,5 @@ ADD digits.cfg /home/DIGITS-4.1-dev/digits
 EXPOSE 5000
 
 WORKDIR /home/DIGITS-4.1-dev
-ENTRYPOINT digits-devserver
+CMD ["./digits-devserver"]
 
