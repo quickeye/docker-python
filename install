@@ -4,6 +4,12 @@ sudo apt-get install -y libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-d
 sudo apt-get install -y --no-install-recommends libboost-all-dev
 sudo apt-get install -y python-skimage-lib
 
+cd /
+mkdir /DATA
+mkdir /DATA/digits
+mkdir /DATA/digits/jobs
+mkdir /DATA/digits/logs
+
 cd /home
 curl -L https://github.com/NVIDIA/nccl/archive/v1.2.3-1+cuda8.0.tar.gz | tar xvz
 cd nccl-1.2.3-1-cuda8.0
