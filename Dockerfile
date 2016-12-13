@@ -17,18 +17,16 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get install -y --no-install-recommends libboost-all-dev
 
-RUN cd /home && \
-    curl -L https://github.com/NVIDIA/nccl/archive/v1.2.3-1+cuda8.0.tar.gz | tar xvz -C nccl && \
-    cd nccl && \
+WORKDIR /home/nccl
+RUN curl -L https://github.com/NVIDIA/nccl/archive/v1.2.3-1+cuda8.0.tar.gz | tar xvz --strip 1 && \
     make CUDA_HOME=/usr/local/cuda -j8 && \
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./build/lib && \
     cp /home/nccl/build/lib/* /usr/local/cuda/lib64/* && \
     cp /home/nccl/build/include/* /usr/local/cuda/include
 
 #Get Nvidia Caffe
-RUN cd /home && \
-    curl -L https://github.com/NVIDIA/caffe/archive/v0.15.14.tar.gz | tar xvz -C caffe && \
-    cd caffe && \
+WORKDIR /home/caffe
+RUN curl -L https://github.com/NVIDIA/caffe/archive/v0.15.14.tar.gz | tar xvz --strip 1 && \
     cp Makefile.config.example Makefile.config && \
     make pycaffe && \
     export PYTHONPATH=/home/caffe/python/caffe:$PYTHONPATH
@@ -56,12 +54,10 @@ RUN sudo apt-get install -y --no-install-recommends \
     python-pil \
     python-pip \
     python-protobuf \
-    python-scipy && \
-    DIGITS_ROOT=/home/digits
+    python-scipy
 
 #Install Source
-RUN cd /home && \
-    curl -L https://github.com/NVIDIA/DIGITS/archive/v4.1-dev.tar.gz | tar xvz -C digits
-
-#Install Python Packages
-RUN sudo pip install -r $DIGITS_ROOT/requirements.txt
+WORKDIR /home/digits
+RUN DIGITS_ROOT=/home/digits && \
+    curl -L https://github.com/NVIDIA/DIGITS/archive/v4.1-dev.tar.gz | tar xvz --strip 1 && \
+    sudo pip install -r $DIGITS_ROOT/requirements.txt
