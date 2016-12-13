@@ -60,4 +60,5 @@ RUN sudo apt-get install -y --no-install-recommends \
 WORKDIR /home/digits
 RUN DIGITS_ROOT=/home/digits && \
     curl -L https://github.com/NVIDIA/DIGITS/archive/v4.1-dev.tar.gz | tar xvz --strip 1 && \
+    sudo pip install pyparsing==1.5.7 && \
     sudo pip install -r $DIGITS_ROOT/requirements.txt
