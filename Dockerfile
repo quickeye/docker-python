@@ -20,7 +20,7 @@ RUN apt-get install -y --no-install-recommends libboost-all-dev
 
 #Get Nvidia Caffe Source and Build
 WORKDIR /home/caffe
-RUN curl -L https://github.com/BLVC/caffe/archive/master.tar.gz | tar xvz --strip 1 && \
+RUN curl -L https://github.com/BVLC/caffe/archive/master.tar.gz | tar xvz --strip 1 && \
     cp Makefile.config.example Makefile.config && \
     make pycaffe
 
