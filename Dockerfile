@@ -28,7 +28,6 @@ ENV PYTHONPATH=/home/caffe/python/caffe:$PYTHONPATH
 
 #Modify Makefile
 RUN sed -i -e 's|# USE_CUDNN|USE_CUDNN|' Makefile.config && \
-    sed -i -e 's|# CUDA_DIR|CUDA_DIR|' Makefile.config && \
     sed -i -e 's|# WITH_PYTHON_LAYER|WITH_PYTHON_LAYER|' Makefile.config && \
     sed -i -n '/# For CUDA < 6\.0, comment the \*_50 lines for compatibility\./{p;:a;N;/# BLAS choice:/!ba;s/.*\n/CUDA_ARCH=-gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_53,code=sm_53 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_62,code=sm_62\n/};p' Makefile.config && \
     make all
