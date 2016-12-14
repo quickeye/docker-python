@@ -1,6 +1,6 @@
 FROM nvidia/cuda:8.0-cudnn5-devel
 MAINTAINER David Wilding <wilding@gmail.com>
-LABEL "UBUNTU 14.04, CUDA=8.0, CUDNN=5, BVLC/CAFFE=rc3, DIGITS=4.1"  
+LABEL "UBUNTU 14.04, CUDA=8.0, CUDNN=5, BVLC/CAFFE=master, DIGITS=4.1"  
 
 #Install NVidia Caffe Dependancies
 RUN apt-get update && apt-get install -y \
@@ -20,7 +20,7 @@ RUN apt-get install -y --no-install-recommends libboost-all-dev
 
 #Get Nvidia Caffe Source and Build
 WORKDIR /home/caffe
-RUN curl -L https://github.com/BVLC/caffe/archive/rc3.tar.gz | tar xvz --strip 1 && \
+RUN curl -L https://github.com/BLVC/caffe/archive/master.tar.gz | tar xvz --strip 1 && \
     cp Makefile.config.example Makefile.config && \
     make pycaffe
 
