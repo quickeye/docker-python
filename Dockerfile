@@ -24,7 +24,7 @@ RUN curl -L https://github.com/BVLC/caffe/archive/master.tar.gz | tar xvz --stri
     cp Makefile.config.example Makefile.config && \
     make pycaffe
 
-ENV PYTHONPATH=/home/caffe/python/caffe:$PYTHONPATH
+ENV PYTHONPATH=/home/caffe/python:$PYTHONPATH
 
 #Modify Makefile
 RUN sed -i -e 's|# USE_CUDNN|USE_CUDNN|' Makefile.config && \
