@@ -9,26 +9,30 @@ FROM ubuntu:14.04
 # Author / Maintainer
 MAINTAINER Rob White
 
-# Update the sources list
-RUN apt-get update && apt-get upgrade -y
-
-# Install basic applications
-RUN apt-get install -y tar git curl ssh nano wget dialog net-tools build-essential
-
-# Install Python and Basic Python Tools
-RUN apt-get install -y python2.7 python2.7-dev python-pip
+# Update the sources list and install basic applications
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+  tar \
+  git \
+  curl \
+  ssh \
+  nano \
+  wget \
+  dialog \
+  net-tools \
+  build-essential \
+  python2.7 \
+  python2.7-dev \
+  python-pip
 
 # Clean up
 RUN apt-get autoremove && apt-get clean
 
 # Copy the application folder inside the container
-ADD . /ams
+WORKDIR /ams
+COPY requirements.txt /ams
 
 # Get pip to download and install requirements
 RUN pip install -r /ams/requirements.txt
 
-# Set the default directory where CMD will execute
-WORKDIR /ams
-
 # Set the default command to execute
-CMD python main.py
+CMD ["./main.py"]
