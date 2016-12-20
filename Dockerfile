@@ -22,7 +22,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
   build-essential \
   python2.7 \
   python2.7-dev \
-  python-pip
+  python-pip \
+  unixodbc-dev
 
 # Clean up
 RUN apt-get autoremove && apt-get clean
