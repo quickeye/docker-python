@@ -36,4 +36,4 @@ COPY requirements.txt /ams
 RUN pip install -r /ams/requirements.txt
 
 # Set the default command to execute
-CMD ["./main.py"]
+CMD ["python","main.py"]
