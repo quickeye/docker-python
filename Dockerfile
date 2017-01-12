@@ -23,17 +23,18 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
   python2.7 \
   python2.7-dev \
   python-pip \
-  unixodbc-dev
+  unixodbc-dev \
+  mysql-client-5.6
 
 # Clean up
 RUN apt-get autoremove && apt-get clean
 
 # Copy the application folder inside the container
-WORKDIR /ams
-COPY requirements.txt /ams
+WORKDIR /DATA/ams
+COPY requirements.txt /DATA/ams
 
 # Get pip to download and install requirements
-RUN pip install -r /ams/requirements.txt
+RUN pip install -r /DATA/ams/requirements.txt
 
 # Set the default command to execute
 CMD ["python","main.py"]
